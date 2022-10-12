@@ -1,0 +1,64 @@
+{% extends "amazon_inputs.html" %}
+{% block content %}
+    <h1 class="animate__animated animate__bounceInUp" id="home_title"> FAQ Generator</h1>
+    <form method="post" class="form-control animate__animated animate__zoomIn" enctype="multipart/form-data">
+        {{form.hidden_tag()}}
+        <div class="cssload-fond" id="loading" style="display: none;">
+          <div class="cssload-container-general" style="margin: auto;">
+              <div class="cssload-internal"><div class="cssload-ballcolor cssload-ball_1"> </div></div>
+              <div class="cssload-internal"><div class="cssload-ballcolor cssload-ball_2"> </div></div>
+              <div class="cssload-internal"><div class="cssload-ballcolor cssload-ball_3"> </div></div>
+              <div class="cssload-internal"><div class="cssload-ballcolor cssload-ball_4"> </div></div>
+          </div>
+          <div style="text-align: center;">Loading.......</div>
+        </div>
+        <div class="form-group" id="content">
+            {{form.file.label(class="label")}}  {{form.file(class="form-control", id="file_input")}}
+            {{form.submit(class="form-control btn btn btn-dark", onclick="loading();", id="submit_button", style="margin-top: 0.5em;")}}
+        </div>
+        {% with messages = get_flashed_messages(category_filter=["input_format_error"]) %}
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="form-group flashes" style="color: red">
+                        <img src="https://img.icons8.com/fluency/48/000000/error.png"/> {{message}}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </form>
+{% endblock %}
+{% block script %}
+          <script>
+            function loading() {
+              const file_input = document.getElementById("file_input");
+              
+              if (!file_input.checkValidity())
+              {
+                $("#loading").hide();
+                $("#content").show();
+              }
+              else
+              {
+                $("#loading").show();
+                $("#content").hide();
+              }
+            }
+          </script>
+          <script>
+            window.document.onload = function() {
+              const file_input = document.getElementById("file_input");
+              
+              if (!file_input.checkValidity())
+              {
+                $("#loading").hide();
+                $("#content").show();
+              }
+              else
+              {
+                $("#loading").show();
+                $("#content").hide();
+              }
+            }
+          </script>
+          <script>document.getElementById("upload_page").classList.add("active");</script>
+{% endblock %}

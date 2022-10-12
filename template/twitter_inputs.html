@@ -1,0 +1,57 @@
+{% extends "amazon_inputs.html" %}
+{% block content %}
+    <h1 class="animate__animated animate__bounceInUp" id="home_title"> FAQ Generator</h1>
+    <form method="post" class="form-control animate__animated animate__zoomIn">
+        <div class="cssload-fond" id="loading" style="display: none; margin-top: 2em; margin-bottom: 2em;">
+            <div class="cssload-container-general" style="margin: auto;">
+                <div class="cssload-internal"><div class="cssload-ballcolor cssload-ball_1"> </div></div>
+                <div class="cssload-internal"><div class="cssload-ballcolor cssload-ball_2"> </div></div>
+                <div class="cssload-internal"><div class="cssload-ballcolor cssload-ball_3"> </div></div>
+                <div class="cssload-internal"><div class="cssload-ballcolor cssload-ball_4"> </div></div>
+            </div>
+            <div style="text-align: center;">Loading.......</div>
+        </div>
+        {{form.hidden_tag()}}
+        <div class="form-group" id="content">
+            {{form.numTweets.label(class="label")}}  {{form.numTweets(class="form-control", placeholder="e.g. 1, 2, 3", type="number", id="num_tweets")}}
+            {{form.query.label(class="label", style="margin-top: 2em;")}} {{form.query(class="form-control", placeholder="e.g. B083XHB4ML", id="query")}}
+            {{form.submit(class="form-control btn btn btn-dark", id="submit_button", onclick="loading();", style="margin-top: 2em;")}}
+        </div>
+    </form>
+{% endblock %}
+{% block script %}
+          <script>
+            function loading() {
+              const num_tweets = document.getElementById("num_tweets");
+              const query = document.getElementById("query");
+              if (!num_tweets.checkValidity() || !query.checkValidity())
+              {
+                $("#loading").hide();
+                $("#content").show();
+              }
+              else
+              {
+                $("#loading").show();
+                $("#content").hide();
+              }
+            }
+          </script>
+          <script>
+            window.document.onload = function() {
+                const num_tweets = document.getElementById("num_tweets");
+                const query = document.getElementById("query");
+                if (!num_tweets.checkValidity() || !query.checkValidity())
+                {
+                  $("#loading").hide();
+                  $("#content").show();
+                }
+                else
+                {
+                  $("#loading").show();
+                  $("#content").hide();
+                }
+            }
+          </script>
+          <script>document.getElementById("twitter_page").classList.add("active");</script>
+          
+{% endblock %}

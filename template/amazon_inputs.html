@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>FAQ Generator</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="../static/main.css">
+        <link rel="stylesheet" href="../static/loading.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/tsparticles/2.2.2/tsparticles.min.js">
+        <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+        <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+        {% block link %}
+        {% endblock %}
+    </head>
+    <body>
+        <div class="color_behind"></div>
+        {% include 'navbar.html'%}
+        <div class="homepage_wrapper">
+          <section id="content_group">
+            {% block content %}
+              <h1 class="animate__animated animate__bounceInUp" id="home_title"> FAQ Generator</h1>
+              <!-- <div id="loading"></div> -->
+              
+              <form method="post" class="form-control animate__animated animate__zoomIn">
+                  <div class="cssload-fond" id="loading" style="display: none;">
+                    <div class="cssload-container-general" style="margin: auto;">
+                        <div class="cssload-internal"><div class="cssload-ballcolor cssload-ball_1"> </div></div>
+                        <div class="cssload-internal"><div class="cssload-ballcolor cssload-ball_2"> </div></div>
+                        <div class="cssload-internal"><div class="cssload-ballcolor cssload-ball_3"> </div></div>
+                        <div class="cssload-internal"><div class="cssload-ballcolor cssload-ball_4"> </div></div>
+                    </div>
+                    <div style="text-align: center;">Loading.......</div>
+                  </div>
+                  {{form.hidden_tag()}}
+                  <div class="form-group" id="content">
+                    {{form.pages.label(class="label")}} {{form.pages(class="form-control input", placeholder="e.g. 1, 2, 3", id="page_input")}}
+                    {{form.asin.label(class="label")}} {{form.asin(class="form-control input", placeholder="e.g. B083XHB4ML", id="asin_input")}}
+                    {{form.country.label(class="label")}} {{form.country(class="form-control input", placeholder="e.g. AU, VN, US, NZ", id="market_place_input")}}
+                    {{form.variants.label(class="label")}} {{form.variants(class="form-control input", style="list-style: none")}}
+                    {{form.top.label(class="label")}} {{form.top(class="form-control input", style="list-style: none")}}
+                    {{form.submit(class="form-control btn btn btn-dark", onclick="loading();", id="submit_button")}}
+                  </div>
+              </form>
+            {% endblock %}
+          </section>
+          {% block other_content %}
+          {% endblock %}
+        </div>
+        {% block script %}
+          <script>
+            function loading() {
+              console.log("loading");
+              const page_input = document.getElementById("page_input");
+              const asin_input = document.getElementById("asin_input");
+              const market_place_input = document.getElementById("market_place_input");
+              const variant_input0 = document.getElementById("variants-0");
+              const variant_input1 = document.getElementById("variants-1");
+              const top_input0 = document.getElementById("top-0");
+              const top_input1 = document.getElementById("top-1");
+              if (!page_input.checkValidity() || !asin_input.checkValidity() || !market_place_input.checkValidity() 
+              || !variant_input0.checkValidity() || !top_input0.checkValidity() || !variant_input1.checkValidity() || !top_input1.checkValidity())
+              {
+                $("#loading").hide();
+                $("#content").show();
+              }
+              else
+              {
+                $("#loading").show();
+                $("#content").hide();
+              }
+            }
+          </script>
+          <script>
+            window.document.onload = function() {
+              console.log("loading");
+              const page_input = document.getElementById("page_input");
+              const asin_input = document.getElementById("asin_input");
+              const market_place_input = document.getElementById("market_place_input");
+              const variant_input0 = document.getElementById("variants-0");
+              const variant_input1 = document.getElementById("variants-1");
+              const top_input0 = document.getElementById("top-0");
+              const top_input1 = document.getElementById("top-1");
+              if (!page_input.checkValidity() || !asin_input.checkValidity() || !market_place_input.checkValidity() 
+              || !variant_input0.checkValidity() || !top_input0.checkValidity() || !variant_input1.checkValidity() || !top_input1.checkValidity())
+              {
+                $("#loading").hide();
+                $("#content").show();
+              }
+              else
+              {
+                $("#loading").show();
+                $("#content").hide();
+              }
+            }
+          </script>
+          <script>
+            document.getElementById("amazon_page").classList.add("active");
+          </script>
+        {% endblock %}
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+    </body>
+</html>

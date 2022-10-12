@@ -1,0 +1,46 @@
+{% extends "amazon_inputs.html" %}
+{% block link %}
+    <link href="../static/questions.css" rel="stylesheet">
+    <link href="../static/faq.css" rel="stylesheet">
+{% endblock %}
+{% block content %}
+    <div>
+        <h1 class="animate__animated animate__lightSpeedInRight"> <img src="https://img.icons8.com/color/48/000000/faq.png"/> Questions</h1>
+        <ol class="overflow-auto list-group">
+            {% set count = namespace(value = 0) %}
+            {% for review, question, answer in zip(reviews, questions, answers) %}
+                <li class="animate__animated animate__bounceInUp list-group-item d-flex justify-content-between align-items-start">
+                    <div class="ms-2 me-auto">
+                        {% for item1, item2 in zip(question, answer) %}
+                            <span class="badge text-bg-warning rounded-pill" id="question-{{count.value}}"> #{{ count.value }} </span> <div class="fw-bold" style="display: inline">Question: {{item1}}</div>
+                            <div class="fst-italic"> <span class="fw-bold"><img src="https://img.icons8.com/external-flatart-icons-outline-flatarticons/20/000000/external-answer-arrow-flatart-icons-outline-flatarticons.png"/> Answer</span>: {{item2}}</div>
+                            {% set count.value = count.value + 1 %}
+                        {% endfor %}
+                        <br>
+                        <span class="fw-bold"> Review: </span>{{review}}
+                    </div>
+                </li>
+            {% endfor %}
+        </ol>
+    </div>
+{% endblock %}
+{% block other_content %}
+    
+    <section id="faq_content">
+        <h1 class="animate__animated animate__lightSpeedInRight"> <img src="https://img.icons8.com/color/48/000000/faq.png"/> FAQ </h1>
+        <ol class="overflow-auto list-group">
+            {% for item in faq_list %}
+                <li class="animate__animated animate__bounceInUp list-group-item d-flex justify-content-between align-items-start">
+                    <div class="ms-2 me-auto">
+                        <div class="fw-bold">Question: <span class="fw-normal">{{item[0]}}</span> </div>
+                        <div class="fw-bold"><img src="https://img.icons8.com/external-flatart-icons-outline-flatarticons/20/000000/external-answer-arrow-flatart-icons-outline-flatarticons.png"/> Answer: <span class="fw-normal">{{item[2]}}</span> </div>
+                    </div>
+                    <span class="badge bg-primary rounded-pill" style="margin-left: 1em;"> Frequency: {{item[1]}}</span>
+                    <span class="badge rounded-pill text-bg-warning" style="margin-left: 0.25em;"><a href="#question-{{item[3]}}" style="color: black;">#Question-{{item[3]}}</a></span>
+                </li>
+            {% endfor %}
+        </ol>
+    </section>
+    
+    
+{% endblock %}

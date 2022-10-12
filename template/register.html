@@ -1,0 +1,27 @@
+{% extends "amazon_inputs.html" %}
+{% block content %}
+    <h1 class="animate__animated animate__bounceInUp" id="home_title"> FAQ Generator</h1>
+    <form method="post" class="form-control animate__animated animate__zoomIn">
+        {{form.hidden_tag()}}
+        <div class="form-group">
+            {{form.username.label(class="label")}}  {{form.username(class="form-control", type="text")}}
+            {{form.password.label(class="label", style="margin-top: 2em;")}} {{form.password(class="form-control", type="password")}}
+            {{form.submit(class="form-control btn btn btn-dark", id="submit_button", style="margin-top: 2em;")}}
+            <a class="label" href="{{url_for('index')}}" style="text-align: center;">Already had an account? Sign In</a>
+        </div>
+        {% with messages = get_flashed_messages(category_filter=["duplicate_username"]) %}
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="form-group flashes" style="color: red">
+                        <img src="https://img.icons8.com/fluency/48/000000/error.png"/> {{message}}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </form>
+{% endblock %}
+{% block script %}
+    <script>
+        document.getElementById("log_out_button").style.display ='none';
+    </script>
+{% endblock %}

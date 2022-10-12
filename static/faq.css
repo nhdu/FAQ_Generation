@@ -1,0 +1,15 @@
+#faq_content {
+    position: absolute;
+    width: auto;
+    height: auto;
+    max-width: 40%;
+    max-height: 85%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 50%);
+    z-index: 1;
+    /* box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; */
+    border-radius: 10px;
+    margin-top: 2%;
+    padding-bottom: 5%;
+}
